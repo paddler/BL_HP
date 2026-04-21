@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BroadLight — ビジネスをAIで変革する</title>
+  <meta name="description" content="BroadLightは、AI戦略コンサルティング・データサイエンス・業務自動化を通じて、企業の持続的な成長と革新を支援する総合コンサルティング企業です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap">
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #050C18;
+      --bg2:       #07111E;
+      --card:      #0B1624;
+      --blue:      #1662D9;
+      --cyan:      #23C9F3;
+      --cyan-l:    #56E0FF;
+      --text:      #FFFFFF;
+      --text2:     rgba(255,255,255,0.62);
+      --text3:     rgba(255,255,255,0.35);
+      --border:    rgba(255,255,255,0.07);
+      --border-h:  rgba(35,201,243,0.35);
+      --max:       1160px;
+      --r:         18px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.8; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ── Scroll reveal ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px;
+      display: flex; align-items: center;
+      padding: 0 40px;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #header.scrolled {
+      background: rgba(5,12,24,0.82);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom-color: var(--border);
+    }
+    .hd-inner { width: 100%; max-width: var(--max); margin: 0 auto; display: flex; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em; }
+    .logo img { width: 32px; height: 32px; object-fit: contain; }
+    .nav { display: flex; gap: 2px; margin: 0 auto; }
+    .nav a {
+      color: var(--text2); font-size: 0.88rem; font-weight: 400;
+      padding: 8px 16px; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav a.active { color: var(--cyan-l); }
+    .hd-cta {
+      padding: 9px 22px; font-size: 0.85rem; font-weight: 700;
+      border: 1px solid rgba(35,201,243,0.4); border-radius: 50px;
+      color: var(--cyan-l); cursor: pointer; background: rgba(35,201,243,0.06);
+      transition: all 0.25s ease; white-space: nowrap; font-family: inherit;
+    }
+    .hd-cta:hover { background: rgba(35,201,243,0.14); border-color: var(--cyan-l); }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+      padding: 120px 24px 80px;
+    }
+    .hero-orb {
+      position: absolute; pointer-events: none;
+      border-radius: 50%; filter: blur(80px); animation: drift 14s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 700px; height: 700px; top: -15%; left: -15%; background: radial-gradient(circle, rgba(22,98,217,0.28) 0%, transparent 70%); }
+    .orb2 { width: 500px; height: 500px; bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(35,201,243,0.16) 0%, transparent 70%); animation-delay: -5s; }
+    .orb3 { width: 350px; height: 350px; top: 30%; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(86,224,255,0.09) 0%, transparent 70%); animation-delay: -9s; }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.1); }
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 860px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(35,201,243,0.08); border: 1px solid rgba(35,201,243,0.25);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--cyan-l); text-transform: uppercase; margin-bottom: 2.2rem;
+    }
+    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+    .hero-title {
+      font-size: clamp(3.2rem, 8vw, 6.2rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+      background: linear-gradient(135deg, #fff 30%, rgba(86,224,255,0.9) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub-jp { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 300; color: var(--text2); margin-bottom: 0.5rem; }
+    .hero-sub-en { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 3rem; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 16px 40px; font-size: 1rem; font-weight: 700;
+      background: linear-gradient(135deg, #23C9F3 0%, #1662D9 100%);
+      color: #fff; border: none; border-radius: 50px; cursor: pointer;
+      font-family: inherit; box-shadow: 0 0 40px rgba(22,98,217,0.45);
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .btn-primary::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent); opacity:0; transition:opacity 0.3s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(35,201,243,0.5); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-ghost {
+      padding: 15px 36px; font-size: 0.95rem; font-weight: 500;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text2); border-radius: 50px; cursor: pointer; font-family: inherit;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    /* ── Section shared ─────────────────────────────────────── */
+    section { padding: 120px 24px; }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .eyebrow {
+      font-size: 0.73rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 1.2rem; display: block;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.015em; color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .section-body {
+      font-size: 1.05rem; color: var(--text2); line-height: 1.9;
+      max-width: 640px;
+    }
+
+    /* ── Company ────────────────────────────────────────────── */
+    #company { background: var(--bg2); }
+    .company-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-block {
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .mission-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.8rem; display: block; }
+    .mission-text { font-size: 1.25rem; font-weight: 700; color: var(--cyan-l); line-height: 1.5; }
+    .company-visual {
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .logo-display {
+      width: 240px; height: 240px; object-fit: contain;
+      filter: drop-shadow(0 0 60px rgba(22,98,217,0.4));
+      animation: float 7s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+    .glow-ring {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      border: 1px solid rgba(35,201,243,0.15);
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+    .glow-ring:nth-child(2) { width: 380px; height: 380px; animation-delay: 1s; border-color: rgba(22,98,217,0.08); }
+    @keyframes pulse-ring { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.04);opacity:0.5} }
+
+    /* ── Services ───────────────────────────────────────────── */
+    #services { background: var(--bg); }
+    .services-head { text-align: center; margin-bottom: 64px; }
+    .services-head .section-body { margin: 0 auto; text-align: center; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 40px 32px;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0; transition: opacity 0.35s ease;
+    }
+    .service-card:hover { border-color: var(--border-h); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(22,98,217,0.15); }
+    .service-card:hover::before { opacity: 1; }
+    .svc-num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; color: var(--cyan); margin-bottom: 1.6rem; display: block; }
+    .svc-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+    .svc-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; line-height: 1.4; }
+    .svc-body { font-size: 0.9rem; color: var(--text2); line-height: 1.85; }
+
+    /* ── Contact ────────────────────────────────────────────── */
+    #contact { background: var(--bg2); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+    .contact-email-block { margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .contact-email-label { font-size: 0.72rem; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+    .contact-email-link { color: var(--cyan-l); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .contact-email-link:hover { color: var(--text); }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 0.82rem; color: var(--text3); font-weight: 500; letter-spacing: 0.04em; }
+    input, textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; color: var(--text);
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    input::placeholder, textarea::placeholder { color: var(--text3); }
+    input:focus, textarea:focus { border-color: rgba(35,201,243,0.5); background: rgba(35,201,243,0.04); }
+    textarea { min-height: 140px; resize: vertical; }
+    .submit-btn {
+      align-self: flex-start; margin-top: 8px;
+      padding: 16px 44px; font-size: 0.95rem; font-weight: 700;
+      background: linear-gradient(135deg, #23C9F3 0%, #1662D9 100%);
+      color: #fff; border: none; border-radius: 50px; cursor: pointer;
+      font-family: inherit; box-shadow: 0 0 30px rgba(22,98,217,0.35);
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(35,201,243,0.45); }
+    .success-msg {
+      display: none; padding: 20px 24px;
+      background: rgba(35,201,243,0.08); border: 1px solid rgba(35,201,243,0.25);
+      border-radius: 12px; color: var(--cyan-l); font-size: 0.95rem; font-weight: 500;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 60px 24px 40px;
+    }
+    .ft-inner { max-width: var(--max); margin: 0 auto; }
+    .ft-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 48px; flex-wrap: wrap; }
+    .ft-brand .logo { margin-bottom: 12px; }
+    .ft-brand p { font-size: 0.85rem; color: var(--text3); line-height: 1.8; max-width: 260px; }
+    .ft-cols { display: flex; gap: 60px; }
+    .ft-col h4 { font-size: 0.78rem; font-weight: 600; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .ft-col a { font-size: 0.88rem; color: var(--text2); transition: color 0.2s; }
+    .ft-col a:hover { color: var(--text); }
+    .ft-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+    .ft-bottom p { font-size: 0.8rem; color: var(--text3); }
+    .social-row { display: flex; gap: 10px; }
+    .social-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; color: var(--text2); font-weight: 700;
+      transition: all 0.25s ease; cursor: pointer;
+    }
+    .social-btn:hover { background: rgba(35,201,243,0.12); border-color: var(--border-h); color: var(--cyan-l); }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #header { padding: 0 20px; }
+      .nav { display: none; }
+      section { padding: 80px 20px; }
+      .company-grid, .contact-wrap { grid-template-columns: 1fr; gap: 48px; }
+      .company-visual { order: -1; }
+      .logo-display { width: 160px; height: 160px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .ft-top { flex-direction: column; }
+      .ft-cols { gap: 32px; flex-wrap: wrap; }
+    }
+    @media (max-width: 600px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 300px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header id="header">
+  <div class="hd-inner">
+    <a href="#" class="logo">
+      <img src="assets/BL_logo.png" alt="BroadLight">
+      <span>BroadLight</span>
+    </a>
+    <nav class="nav">
+      <a href="#company" data-sec="company">会社情報</a>
+      <a href="#services" data-sec="services">事業領域</a>
+      <a href="#contact" data-sec="contact">お問い合わせ</a>
+    </nav>
+    <button class="hd-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'})">
+      ご相談はこちら
+    </button>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal"><span></span>AI Consulting</div>
+    <h1 class="hero-title reveal reveal-d1">BroadLight</h1>
+    <p class="hero-sub-jp reveal reveal-d2">ビジネスをAIで変革する</p>
+    <p class="hero-sub-en reveal reveal-d2">Transforming Business with Artificial Intelligence</p>
+    <div class="hero-btns reveal reveal-d3">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'})">ご相談・お問い合わせ</button>
+      <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth',block:'start'})">事業領域を見る</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Company ── -->
+<section id="company">
+  <div class="container">
+    <div class="company-grid">
+      <div>
+        <span class="eyebrow reveal">About Us</span>
+        <h2 class="section-title reveal reveal-d1">AIで、未来の<br>ビジネスを創る。</h2>
+        <p class="section-body reveal reveal-d2">
+          BroadLightは、最先端のAI技術を活用し、企業の持続的な成長と革新を支援する総合コンサルティング企業です。データサイエンス、機械学習、業務自動化の分野において、豊富な実績と専門知識を持ち、お客様のビジネス課題に対して最適なソリューションをご提案いたします。
+        </p>
+        <p class="section-body reveal reveal-d2" style="margin-top:1rem;">
+          単なる技術提供にとどまらず、お客様と共に未来を描き、実現可能な戦略を立案し、確実な成果へと導くパートナーであることを目指しています。
+        </p>
+        <div class="mission-block reveal reveal-d3">
+          <span class="mission-label">Mission</span>
+          <div class="mission-text">AIで未来を拓き、社会に貢献する</div>
+        </div>
+      </div>
+      <div class="company-visual reveal reveal-d2">
+        <div class="glow-ring"></div>
+        <div class="glow-ring"></div>
+        <img src="assets/BL_logo.png" alt="BroadLight" class="logo-display">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ── -->
+<section id="services">
+  <div class="container">
+    <div class="services-head">
+      <span class="eyebrow reveal">What We Do</span>
+      <h2 class="section-title reveal reveal-d1">事業領域</h2>
+      <p class="section-body reveal reveal-d2">AI技術の力で、企業の課題解決から変革まで、<br>一気通貫でサポートします。</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="svc-num">01 — STRATEGY</span>
+        <span class="svc-icon">🔍</span>
+        <div class="svc-title">AI戦略コンサルティング</div>
+        <p class="svc-body">企業のビジョンに基づき、AI導入の戦略立案から実行支援まで一貫してサポート。ビジネス変革とデジタルトランスフォーメーションを実現します。</p>
+      </div>
+      <div class="service-card reveal reveal-d1">
+        <span class="svc-num">02 — DATA SCIENCE</span>
+        <span class="svc-icon">📊</span>
+        <div class="svc-title">データサイエンスソリューション</div>
+        <p class="svc-body">高度なデータ分析と機械学習モデルの構築により、ビジネスインサイトの抽出と意思決定の最適化を支援します。</p>
+      </div>
+      <div class="service-card reveal reveal-d2">
+        <span class="svc-num">03 — AUTOMATION</span>
+        <span class="svc-icon">🤖</span>
+        <div class="svc-title">自動化実装・運用</div>
+        <p class="svc-body">業務プロセスの自動化とワークフロー改善により、生産性向上とコスト削減を実現します。継続的な運用支援もお任せください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div>
+        <span class="eyebrow reveal">Get in Touch</span>
+        <h2 class="section-title reveal reveal-d1">ご相談・<br>お問い合わせ</h2>
+        <p class="section-body reveal reveal-d2">AIの活用について、まずはお気軽にご相談ください。専門スタッフが丁寧にご対応いたします。</p>
+        <div class="contact-email-block reveal reveal-d3">
+          <span class="contact-email-label">Email</span>
+          <a href="mailto:info@broadlight.co.jp" class="contact-email-link">info@broadlight.co.jp</a>
+        </div>
+      </div>
+      <div class="reveal reveal-d1">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">お名前</label>
+              <input id="name" type="text" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+              <label for="company">会社名</label>
+              <input id="company" type="text" placeholder="株式会社〇〇" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input id="email" type="email" placeholder="info@example.co.jp" required>
+          </div>
+          <div class="form-group">
+            <label for="message">お問い合わせ内容</label>
+            <textarea id="message" placeholder="ご質問・ご相談内容をご記入ください" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">送信する</button>
+        </form>
+        <div class="success-msg" id="success-msg">
+          ✓ &nbsp;送信完了しました。内容を確認の上、担当者よりご連絡いたします。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#" class="logo">
+          <img src="assets/BL_logo.png" alt="BroadLight">
+          <span>BroadLight</span>
+        </a>
+        <p>〒100-0003<br>東京都千代田区大手町3-1-1<br>大手町ビル5F</p>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#company">会社情報</a></li>
+            <li><a href="#services">事業領域</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </div>
+        <div class="ft-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">採用情報</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© 2026 BroadLight Inc. All Rights Reserved.</p>
+      <div class="social-row">
+        <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+        <a class="social-btn" href="#" aria-label="X">𝕏</a>
+        <a class="social-btn" href="#" aria-label="Facebook">f</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Scroll-aware header ──
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── Active nav link ──
+  const sections = ['company', 'services', 'contact'];
+  const navLinks = document.querySelectorAll('.nav a[data-sec]');
+  const updateNav = () => {
+    const y = window.scrollY + 120;
+    let active = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= y) active = id;
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.dataset.sec === active));
+  };
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  // ── Scroll reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    revealEls.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight + 50) {
+        el.classList.add('in');
+      } else {
+        observer.observe(el);
+      }
+    });
+  }));
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const msg = document.getElementById('success-msg');
+    form.style.display = 'none';
+    msg.style.display = 'block';
+    setTimeout(() => {
+      form.style.display = 'flex';
+      msg.style.display = 'none';
+      form.reset();
+    }, 5000);
+  }
+</script>
+</body>
+</html>
