@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="googlebot" content="noindex, nofollow">
+    <title>BroadLight - ビジネスをAIで変革する</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #2E3A52;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A3FBF 0%, #1662D9 40%, #23C9F3 80%, #56E0FF 100%);
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-decoration.brain {
+            top: 15%;
+            right: 10%;
+            font-size: 4rem;
+        }
+
+        .hero-decoration.server {
+            bottom: 20%;
+            left: 8%;
+            font-size: 3rem;
+        }
+
+        .hero-decoration.gear {
+            top: 25%;
+            left: 12%;
+            font-size: 3.5rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #FFFFFF;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Company Info Section */
+        .company-info {
+            position: relative;
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, #EAF7FF 0%, #F7FBFF 100%);
+        }
+
+        .company-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            box-shadow: 0 10px 50px rgba(10, 63, 191, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .section-heading {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: #0C1837;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .company-card p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            color: #2E3A52;
+        }
+
+        .mission {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1662D9;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(22, 98, 217, 0.2);
+        }
+
+        /* Services Section */
+        .services {
+            position: relative;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #0B2E9B 0%, #1347C8 40%, #1D78E5 70%, #55D9FF 100%);
+            overflow: hidden;
+        }
+
+        .services .section-heading {
+            color: #FFFFFF;
+            margin-bottom: 4rem;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        /* Wave Divider */
+        .wave-divider {
+            height: 200px;
+            background: linear-gradient(180deg, #55D9FF 0%, #5BBEFF 50%, #2A69E8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-divider::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: wave 20s linear infinite;
+        }
+
+        /* Contact Section */
+        .contact {
+            position: relative;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #1132A6 0%, #0F4FBF 50%, #2A69E8 100%);
+        }
+
+        .contact .section-heading {
+            color: #FFFFFF;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #FFFFFF;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #56E0FF;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(86, 224, 255, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #23C9F3 0%, #1662D9 100%);
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(35, 201, 243, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(35, 201, 243, 0.6);
+        }
+
+        .contact-email {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .contact-email a {
+            color: #56E0FF;
+            text-decoration: none;
+            border-bottom: 2px solid #56E0FF;
+            transition: all 0.3s ease;
+        }
+
+        .contact-email a:hover {
+            color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #091A4D 0%, #0E245F 50%, #2B1E67 100%);
+            padding: 4rem 2rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #56E0FF;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #56E0FF;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .company-card,
+            .contact-form {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        /* Prevent text selection for decorative elements */
+        .hero-decoration {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-decoration brain">🧠</div>
+        <div class="hero-decoration server">🖥️</div>
+        <div class="hero-decoration gear">⚙️</div>
+        
+        <div class="hero-content">
+            <h1>BroadLight</h1>
+            <p class="hero-tagline">ビジネスをAIで変革する</p>
+        </div>
+    </section>
+
+    <!-- Company Info Section -->
+    <section class="company-info">
+        <div class="company-card">
+            <h2 class="section-heading">会社情報</h2>
+            <p>
+                BroadLightは、最先端のAI技術を活用し、企業の持続的な成長と革新を支援する総合コンサルティング企業です。
+                データサイエンス、機械学習、業務自動化の分野において、豊富な実績と専門知識を持ち、
+                お客様のビジネス課題に対して最適なソリューションをご提案いたします。
+            </p>
+            <p>
+                私たちは、単なる技術提供にとどまらず、お客様と共に未来を描き、
+                実現可能な戦略を立案し、確実な成果へと導くパートナーであることを目指しています。
+                AI技術の民主化を推進し、あらゆる企業が先進技術の恩恵を受けられる社会の実現に貢献します。
+            </p>
+            <p class="mission">
+                ミッション：AIで未来を拓き、社会に貢献する
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2 class="section-heading">事業領域</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">🔍</span>
+                <h3>AI戦略コンサルティング</h3>
+                <p>
+                    企業のビジョンに基づき、AI導入の戦略立案から実行支援まで一貫してサポート。
+                    ビジネス変革とデジタルトランスフォーメーションを実現します。
+                </p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">📊</span>
+                <h3>データサイエンスソリューション</h3>
+                <p>
+                    高度なデータ分析と機械学習モデルの構築により、
+                    ビジネスインサイトの抽出と意思決定の最適化を支援します。
+                </p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🤖</span>
+                <h3>自動化実装・運用</h3>
+                <p>
+                    業務プロセスの自動化とワークフロー改善により、
+                    生産性向上とコスト削減を実現します。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider -->
+    <div class="wave-divider"></div>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2 class="section-heading">ご相談・お問い合わせ</h2>
+        <form class="contact-form" action="#" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">お名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">会社名</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">お問い合わせ内容</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">送信する</button>
+        </form>
+        <p class="contact-email">
+            メールでのお問い合わせ: <a href="mailto:info@broadlight.co.jp">info@broadlight.co.jp</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ナビゲーション</h4>
+                <ul>
+                    <li><a href="#company">会社概要</a></li>
+                    <li><a href="#services">事業案内</a></li>
+                    <li><a href="#careers">採用情報</a></li>
+                    <li><a href="#privacy">プライバシーポリシー</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>BroadLight</h4>
+                <p>
+                    〒100-0003<br>
+                    東京都千代田区大手町3-1-1<br>
+                    大手町ビル5F
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>フォローする</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" aria-label="Facebook">f</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 BroadLight Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler (customize as needed)
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('お問い合わせありがとうございます。内容を確認の上、ご連絡させていただきます。');
+            this.reset();
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.company-card, .service-card, .contact-form').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

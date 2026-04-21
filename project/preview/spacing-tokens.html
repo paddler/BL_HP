@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin: 0; padding: 20px; background: #F7FBFF; font-family: var(--font-sans); }
+.section { margin-bottom: 16px; }
+.section-title { font-size: 10px; font-weight: 700; color: #8899bb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.bar { height: 20px; background: #1662D9; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; }
+.token { font-family: monospace; font-size: 10px; color: #6b7a99; min-width: 80px; }
+.val { font-size: 10px; color: #2E3A52; font-weight: 600; }
+
+.radius-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.radius-box { width: 52px; height: 36px; background: #1662D9; text-align: center; line-height: 36px; }
+.radius-label { font-size: 10px; color: #2E3A52; text-align: center; margin-top: 4px; font-weight: 600; }
+
+.shadow-row { display: flex; gap: 14px; }
+.shadow-box { width: 80px; height: 44px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #2E3A52; font-weight: 600; }
+</style></head>
+<body>
+<div class="section">
+  <div class="section-title">Spacing Scale</div>
+  <div class="row"><div class="token">--space-1</div><div class="bar" style="width:8px"></div><div class="val">0.5rem / 8px</div></div>
+  <div class="row"><div class="token">--space-2</div><div class="bar" style="width:16px"></div><div class="val">1rem / 16px</div></div>
+  <div class="row"><div class="token">--space-3</div><div class="bar" style="width:24px"></div><div class="val">1.5rem / 24px</div></div>
+  <div class="row"><div class="token">--space-4</div><div class="bar" style="width:32px"></div><div class="val">2rem / 32px</div></div>
+  <div class="row"><div class="token">--space-5</div><div class="bar" style="width:40px"></div><div class="val">2.5rem / 40px</div></div>
+  <div class="row"><div class="token">--space-6</div><div class="bar" style="width:48px"></div><div class="val">3rem / 48px</div></div>
+  <div class="row"><div class="token">--space-8</div><div class="bar" style="width:64px"></div><div class="val">4rem / 64px</div></div>
+  <div class="row"><div class="token">--space-16</div><div class="bar" style="width:128px"></div><div class="val">8rem / 128px</div></div>
+</div>
+<div class="section">
+  <div class="section-title">Border Radii</div>
+  <div class="radius-row">
+    <div><div class="radius-box" style="border-radius:12px"></div><div class="radius-label">sm 12px<br><span style="font-weight:400;color:#8899bb">inputs</span></div></div>
+    <div><div class="radius-box" style="border-radius:20px"></div><div class="radius-label">md 20px<br><span style="font-weight:400;color:#8899bb">cards</span></div></div>
+    <div><div class="radius-box" style="border-radius:24px"></div><div class="radius-label">lg 24px<br><span style="font-weight:400;color:#8899bb">company</span></div></div>
+    <div><div class="radius-box" style="border-radius:50px"></div><div class="radius-label">pill 50px<br><span style="font-weight:400;color:#8899bb">buttons</span></div></div>
+  </div>
+</div>
+<div class="section" style="margin-top:14px">
+  <div class="section-title">Shadows</div>
+  <div class="shadow-row">
+    <div>
+      <div class="shadow-box" style="box-shadow:0 10px 50px rgba(10,63,191,0.15)">card</div>
+      <div class="radius-label" style="width:80px">--shadow-card<br>blue-tinted</div>
+    </div>
+    <div>
+      <div class="shadow-box" style="box-shadow:0 8px 20px rgba(35,201,243,0.4)">glow</div>
+      <div class="radius-label" style="width:80px">--shadow-glow<br>cyan glow</div>
+    </div>
+    <div>
+      <div class="shadow-box" style="box-shadow:0 15px 40px rgba(0,0,0,0.2)">hover</div>
+      <div class="radius-label" style="width:80px">--shadow-hover<br>lifted</div>
+    </div>
+  </div>
+</div>
+</body></html>

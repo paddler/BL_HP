@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin: 0; padding: 20px; background: #F7FBFF; font-family: var(--font-sans); }
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+tr { border-bottom: 1px solid #e8f0f8; }
+td { padding: 7px 10px; vertical-align: middle; }
+.dot { width: 22px; height: 22px; border-radius: 50%; display: inline-block; vertical-align: middle; border: 1px solid rgba(0,0,0,0.08); }
+.token { font-family: monospace; font-size: 11px; color: #1662D9; font-weight: 600; }
+.value { font-family: monospace; font-size: 11px; color: #6b7a99; }
+.desc { color: #2E3A52; font-size: 11px; }
+.thead { font-size: 10px; font-weight: 700; color: #0C1837; text-transform: uppercase; letter-spacing: 0.08em; }
+</style></head>
+<body>
+<table>
+<tr><td class="thead">Role</td><td class="thead">Token</td><td class="thead">Value</td><td class="thead">Usage</td></tr>
+<tr><td><span class="dot" style="background:#1662D9"></span></td><td class="token">--color-brand</td><td class="value">#1662D9</td><td class="desc">Links, CTAs, accents</td></tr>
+<tr><td><span class="dot" style="background:#0A3FBF"></span></td><td class="token">--color-brand-dark</td><td class="value">#0A3FBF</td><td class="desc">Gradient starts, pressed states</td></tr>
+<tr><td><span class="dot" style="background:#23C9F3"></span></td><td class="token">--color-accent</td><td class="value">#23C9F3</td><td class="desc">Button gradients, highlights</td></tr>
+<tr><td><span class="dot" style="background:#56E0FF"></span></td><td class="token">--color-accent-light</td><td class="value">#56E0FF</td><td class="desc">Hover, focus rings, link hover</td></tr>
+<tr><td><span class="dot" style="background:#0C1837"></span></td><td class="token">--color-fg-1</td><td class="value">#0C1837</td><td class="desc">Primary headings (light bg)</td></tr>
+<tr><td><span class="dot" style="background:#2E3A52"></span></td><td class="token">--color-fg-2</td><td class="value">#2E3A52</td><td class="desc">Body text</td></tr>
+<tr><td><span class="dot" style="background:#FFFFFF; border:1px solid #dde"></span></td><td class="token">--color-fg-inverted</td><td class="value">#FFFFFF</td><td class="desc">Text on dark sections</td></tr>
+<tr><td><span class="dot" style="background:#F7FBFF; border:1px solid #dde"></span></td><td class="token">--color-bg-default</td><td class="value">#F7FBFF</td><td class="desc">Page background</td></tr>
+<tr><td><span class="dot" style="background:#EAF7FF; border:1px solid #dde"></span></td><td class="token">--color-bg-subtle</td><td class="value">#EAF7FF</td><td class="desc">Tinted section backgrounds</td></tr>
+<tr><td><span class="dot" style="background:#091A4D"></span></td><td class="token">--color-bg-dark</td><td class="value">#091A4D</td><td class="desc">Dark sections (footer, CTA)</td></tr>
+</table>
+</body></html>
